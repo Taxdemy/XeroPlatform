@@ -2,7 +2,7 @@
 
 | Integration | Purpose | Status | Blocker |
 |-------------|---------|--------|---------|
-| PostgreSQL (hosted) | Primary datastore | Local/PGlite for Phase 1 tests | Hosted project + credentials |
+| PostgreSQL (hosted) | Primary datastore | Declared via `cursor-app.json`; local/PGlite when `DATABASE_URL` unset | Published app gets platform DB on republish |
 | Open Banking (Basiq/Fiskil/…) | Bank feeds | Not started | Commercial + CDR accreditation |
 | ATO DSP / SBR | Lodgment | Not started | DSP registration |
 | STP gateway | Payroll reporting | Not started | Accredited partner / approval |

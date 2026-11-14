@@ -2,7 +2,7 @@
 
 **Last updated:** 2026-11-14  
 **Branch:** `cursor/phase1-accounting-engine-dc3e`  
-**Checkpoint:** Phase 0 complete; Phase 1 core ledger + APIs + UI + tests green.
+**Checkpoint:** Fixed published-app registration by wiring platform Postgres (`DATABASE_URL` + `migrations/` + `cursor-app.json`).
 
 ## A. Existing architecture
 

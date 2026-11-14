@@ -12,7 +12,11 @@ export async function POST(_request: Request, { params }: Params) {
     const user = await requireAuthUser();
     const db = await getDb();
     await requireBusinessAccess(db, user, businessId, "canApprove");
-    const period = await lockPeriod(db, periodId, user.id);
+    const period = await lockPeriod(db, {
+      businessId,
+      periodId,
+      actorUserId: user.id,
+    });
     return jsonOk({ period });
   } catch (error) {
     return jsonError(error);

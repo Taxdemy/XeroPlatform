@@ -2,6 +2,7 @@ import { z } from "zod";
 import { cookies } from "next/headers";
 import { getDb } from "@/server/db/client";
 import { login } from "@/server/auth/service";
+import { assertRateLimit } from "@/server/http/rate-limit";
 import { jsonError, jsonOk } from "@/server/http/respond";
 import { sessionCookieOptions } from "@/server/http/session";
 
@@ -13,6 +14,7 @@ const bodySchema = z.object({
 export async function POST(request: Request) {
   try {
     const body = bodySchema.parse(await request.json());
+    assertRateLimit(`login:${body.email.toLowerCase()}`, 20, 15 * 60_000);
     const db = await getDb();
     const result = await login(db, body);
     const jar = await cookies();

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { getDb } from "@/server/db/client";
 import { registerPracticeOwner } from "@/server/auth/service";
+import { assertRateLimit } from "@/server/http/rate-limit";
 import { jsonError, jsonOk } from "@/server/http/respond";
 import { sessionCookieOptions } from "@/server/http/session";
 import { cookies } from "next/headers";
@@ -15,6 +16,7 @@ const bodySchema = z.object({
 export async function POST(request: Request) {
   try {
     const body = bodySchema.parse(await request.json());
+    assertRateLimit(`register:${body.email.toLowerCase()}`, 5, 15 * 60_000);
     const db = await getDb();
     const result = await registerPracticeOwner(db, body);
     const jar = await cookies();

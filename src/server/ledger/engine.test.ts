@@ -146,7 +146,11 @@ describe("accounting engine", () => {
   });
 
   it("blocks posting into a locked period", async () => {
-    await lockPeriod(db, periodId, userId);
+    await lockPeriod(db, {
+      businessId,
+      periodId,
+      actorUserId: userId,
+    });
     await expect(
       createDraftJournal(db, {
         businessId,

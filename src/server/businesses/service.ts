@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import type { AppDatabase } from "../db/client";
 import {
   accountingPeriods,
@@ -185,11 +185,13 @@ export async function createPeriod(
 
 export async function lockPeriod(
   db: AppDatabase,
-  periodId: string,
-  actorUserId: string,
+  input: { businessId: string; periodId: string; actorUserId: string },
 ) {
   const period = await db.query.accountingPeriods.findFirst({
-    where: eq(accountingPeriods.id, periodId),
+    where: and(
+      eq(accountingPeriods.id, input.periodId),
+      eq(accountingPeriods.businessId, input.businessId),
+    ),
   });
   if (!period) throw new AppError("not_found", "Period not found", 404);
 
@@ -200,16 +202,21 @@ export async function lockPeriod(
   const [updated] = await db
     .update(accountingPeriods)
     .set({ status: "locked" })
-    .where(eq(accountingPeriods.id, periodId))
+    .where(
+      and(
+        eq(accountingPeriods.id, input.periodId),
+        eq(accountingPeriods.businessId, input.businessId),
+      ),
+    )
     .returning();
 
   await writeAudit(db, {
     practiceId: business?.practiceId,
     businessId: period.businessId,
-    actorUserId,
+    actorUserId: input.actorUserId,
     action: "period.locked",
     entityType: "accounting_period",
-    entityId: periodId,
+    entityId: input.periodId,
   });
 
   return updated;
