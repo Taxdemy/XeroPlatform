@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+:root {
+  --ink: #14221c;
+  --ink-soft: #2a3b33;
+  --paper: #f3f6f2;
+  --paper-deep: #e5ece6;
+  --accent: #0f6b57;
+  --accent-strong: #0a4f41;
+  --line: #c7d4cc;
+  --danger: #9b2c2c;
+  --ok: #1f7a4c;
+  --background: var(--paper);
+  --foreground: var(--ink);
+  --font-display: "Fraunces", "Times New Roman", serif;
+  --font-sans: "Figtree", "Helvetica Neue", sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-paper: var(--paper);
+  --color-paper-deep: var(--paper-deep);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-line: var(--line);
+  --color-danger: var(--danger);
+  --color-ok: var(--ok);
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+}
+
+body {
+  color: var(--ink);
+  font-family: var(--font-sans);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, #d7ebe2 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, #dce6f0 0%, transparent 50%),
+    linear-gradient(180deg, #f7faf7 0%, #eef3ef 100%);
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.aa-shell {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+.aa-brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.aa-card-free {
+  border-top: 1px solid var(--line);
+  padding-top: 1.25rem;
+}
+
+.aa-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.aa-table th,
+.aa-table td {
+  text-align: left;
+  padding: 0.65rem 0.4rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.aa-table th {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--ink-soft);
+}
+
+.aa-input,
+.aa-select,
+.aa-textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 0.4rem;
+  padding: 0.55rem 0.7rem;
+  color: var(--ink);
+}
+
+.aa-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 0.4rem;
+  padding: 0.55rem 0.95rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.aa-btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.aa-btn-primary:hover {
+  background: var(--accent-strong);
+}
+
+.aa-btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--ink);
+}
+
+.aa-muted {
+  color: var(--ink-soft);
+}
+
+.aa-status {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.aa-status-posted {
+  color: var(--ok);
+}
+
+.aa-status-draft {
+  color: #8a5a00;
+}
+
+.aa-status-reversed {
+  color: var(--danger);
+}
